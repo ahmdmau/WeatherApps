@@ -37,6 +37,7 @@ class ViewController: UIViewController {
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "CityItemCell", bundle: nil), forCellReuseIdentifier: "CityItemCell")
         tableView.tableFooterView = UIView()
     }
 
@@ -52,9 +53,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = dataCity[indexPath.row].cityName
-        return cell ?? UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CityItemCell") as! CityItemCell
+        cell.city = dataCity[indexPath.row]
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -62,6 +63,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         detailVC.cityId = dataCity[indexPath.row].idCity ?? 0
         detailVC.cityName = dataCity[indexPath.row].cityName ?? ""
         self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
 

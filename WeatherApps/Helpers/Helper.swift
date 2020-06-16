@@ -9,30 +9,13 @@
 import Foundation
 import UIKit
 
-let urlString = "https://api.openweathermap.org/data/2.5/weather/"
-
 class Helper: NSObject {
 
     func showAlertWithTitle(msg:String,controller:UIViewController)
     {
         let alert = UIAlertController(title: "Message", message: msg, preferredStyle: UIAlertController.Style.alert)
-
-        // add an action (button)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-
-        // show the alert
         controller.present(alert, animated: true, completion: nil)
-    }
-}
-
-
-
-extension UIView {
-    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
     }
 }
 
@@ -46,37 +29,6 @@ public extension NSObject {
         return String(describing: self)
     }
 }
-
-
-extension UIColor
-{
-
-    class var themeColor: UIColor {
-        get {
-
-            return UIColor(red: 23.0/255.0, green: 117.0/255.0, blue: 169.0/255.0, alpha: 1.0)
-
-        }
-    }
-
-
-}
-
-extension String
-{
-    /// Checkes if String value is nonEmpty and non nil
-    ///
-    /// - Parameter string: Optional String
-    /// - Returns: if string is empty
-    static func isEmptyString(string: String?) -> Bool {
-        guard let str = string else {
-            return true
-        }
-        return str.isEmpty
-    }
-}
-
-
 
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
